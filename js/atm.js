@@ -10,8 +10,11 @@ class Atm {
     }
   }
 
-  getBalance() {
-    return this.balance;
+  showBalance () {
+    return {
+      balance: this.balance,
+      bills: this.values
+    }
   }
 
   addMoney (value, bills) {
@@ -29,20 +32,28 @@ class Atm {
     return bills.reduce((acc, cur) => { return acc + cur })
   }
 
-  withdrawCash(card, value) {
-    if(value > this.balance) {
-      console.log('There is no enough money!')
+  withdrawCash (card, value) {
+    if (value > this.balance) {
+      console.log('There is not enough money!')
     } else {
-      let temp = value;
-      let keys = Object.keys(this.values).reverse()
+      let temp = value
+      const bills = {}
+      const keys = Object.keys(this.values).reverse()
       keys.forEach((el) => {
-        let amountOfBill = Math.floor(temp / el) <= this.values[el] !
-        Math.floor(temp / el) ? this.values[el];
-        this.values[el] -= amountOfBill;
-        temp -= el * amountOfBill;
+        const amountOfBill = Math.floor(temp / el) <= this.values[el]
+          ? Math.floor(temp / el) : this.values[el]
+        bills[el] = amountOfBill
+        temp -= el * amountOfBill
       })
-      this.balance -= value;
-      card.addMoney(value);
+      if (!temp) {
+        keys.forEach((el) => {
+          this.values[el] = -bills[el]
+        })
+        this.balance -= value
+        card.addMoney(value)
+      } else {
+        console.log('This don`t enough bills!')
+      }
     }
   }
 }

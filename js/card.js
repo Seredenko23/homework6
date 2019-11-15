@@ -7,7 +7,7 @@ class Card {
     this.balance += value
   }
 
-  showBalance() {
-    retrun this.balance
+  showBalance () {
+    return this.balance
   }
 }

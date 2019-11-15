@@ -1,0 +1,28 @@
+.atm {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+}
+
+.wrapper {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+} 
+
+.screen {
+	background: green;
+	width: 800px;
+	height: 600px;
+	color: white
+}
+
+.options {
+	display: flex;
+	justify-content: center;
+} 
+
+.opt-btn {
+	margin: 5px 10px;
+}

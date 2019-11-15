@@ -3,8 +3,37 @@
 <head>
 	<meta charset="UTF-8">
 	<title>atm</title>
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<script src="js/atm.js"></script>
+	<script src="js/card.js"></script>
 </head>
 <body>
-	
+	<div class="atm">
+		<div class="wrapper">
+			<button class="ctr-btn" data-values='50'>50</button>
+			<button class="ctr-btn" data-values='100'>100</button>
+			<button class="ctr-btn" data-values='200'>200</button>
+		</div>
+		<div class="screen">
+			<h1>
+				Оберіть дію
+			</h1>
+		</div>
+		<div class="wrapper">
+			<button class="ctr-btn" data-values='500'>500</button>
+			<button class="ctr-btn" data-values='1000'>1000</button>
+		</div>
+	</div>
+	<div class="options">
+		<button class="opt-btn">Add money</button>
+		<button class="opt-btn">Widhdraw money</button>
+		<button class="opt-btn">Show balance</button>
+		<button class="opt-btn">something</button>
+	</div>
+
+	<script type="text/javascript">
+		let test = new Atm();
+		let card = new Card();
+	</script>
 </body>
 </html>
