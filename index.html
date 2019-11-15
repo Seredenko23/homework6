@@ -8,31 +8,34 @@
 	<script src="js/card.js"></script>
 </head>
 <body>
-	<div class="atm">
+	<div class="atm" id="atm">
 		<div class="wrapper">
 			<button class="ctr-btn" data-values='50'>50</button>
 			<button class="ctr-btn" data-values='100'>100</button>
 			<button class="ctr-btn" data-values='200'>200</button>
 		</div>
 		<div class="screen">
-			<h1>
+			<span class="atm-info" id="info">
 				Оберіть дію
-			</h1>
+			</span>
 		</div>
 		<div class="wrapper">
 			<button class="ctr-btn" data-values='500'>500</button>
 			<button class="ctr-btn" data-values='1000'>1000</button>
 		</div>
 	</div>
-	<div class="options">
-		<button class="opt-btn">Add money</button>
-		<button class="opt-btn">Widhdraw money</button>
-		<button class="opt-btn">Show balance</button>
-		<button class="opt-btn">something</button>
-	</div>
+	<div class="options" id="options">
+		<button class="opt-btn" data-type='add'>Add money</button>
+		<button class="opt-btn" data-type='withdraw'>Withdraw money</button>
+		<button class="opt-btn" data-type='balance'>Show balance</button>
+		<!--<button class="opt-btn" data-type=''>something</button>
+	</div>-->
 
 	<script type="text/javascript">
-		let test = new Atm();
+		let options = document.getElementById('options')
+		let atmWrapper = document.getElementById('atm')
+		let test = new Atm(atmWrapper, options);
+		test.initEvents();
 		let card = new Card();
 	</script>
 </body>

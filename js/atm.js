@@ -1,5 +1,8 @@
 class Atm {
-  constructor () {
+  constructor (atmWrapper, options) {
+    this.atmWrapper = atmWrapper,
+    this.options = options,
+    this.info = document.getElementById('info'),
     this.balance = 0,
     this.values = {
       1000: 0,
@@ -55,5 +58,24 @@ class Atm {
         console.log('This don`t enough bills!')
       }
     }
+  }
+
+  optionHandler (event) {
+    const target = event.target
+    switch (target.dataset.type) {
+      case 'add':
+        info.textContent = 'TO DO'
+        break
+      case 'withdraw':
+        info.textContent = 'TO DO'
+        break
+      case 'balance':
+        info.textContent = `На рахунку ${this.balance}`
+        break
+    }
+  }
+
+  initEvents () {
+    this.options.addEventListener('click', this.optionHandler.bind(this))
   }
 }
