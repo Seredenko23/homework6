@@ -9,33 +9,55 @@
 </head>
 <body>
 	<div class="atm" id="atm">
-		<div class="wrapper">
-			<button class="ctr-btn" data-values='50'>50</button>
-			<button class="ctr-btn" data-values='100'>100</button>
-			<button class="ctr-btn" data-values='200'>200</button>
-		</div>
 		<div class="screen">
-			<span class="atm-info" id="info">
-				Оберіть дію
-			</span>
-		</div>
-		<div class="wrapper">
-			<button class="ctr-btn" data-values='500'>500</button>
-			<button class="ctr-btn" data-values='1000'>1000</button>
+			<div class="content content-js">
+				<button class="to-main main-js">На головну</button>
+				<p class="info atm-info-js">
+					Оберіть дію
+				</p>
+				
+				<div class='add-js'>
+					<p class="totalSum">Вся сума:<span class="total"> 0 </p>
+					<button>Перерахувати</button>
+				</div>
+
+				<div class="wrapper add-js">
+					<button class="ctr-btn"
+					 data-values='50'>50</button>
+					<button class="ctr-btn"
+					 data-values='100'>100</button>
+					<button class="ctr-btn"
+					 data-values='200'>200</button>
+					<button class="ctr-btn"
+					 data-values='500'>500</button>
+					<button class="ctr-btn"
+					 data-values='1000'>1000</button>
+				</div>
+
+				<div class="wrapper withdraw-js">
+					<input type="text" class="withdraw-input">
+					<button class="ctr-btn" data-type='withdraw'>Зняти</button>
+				</div>
+
+				<div class="wrapper options-js">
+					<button class="ctr-btn"
+					 data-type='add'>Add money</buwtton>
+					<button class="ctr-btn"
+					 data-type='withdraw'>Withdraw money</button>
+					<button class="ctr-btn"
+					 data-type='balance'>Show balance</button>
+				</div>	
+
+			</div>
 		</div>
 	</div>
-	<div class="options" id="options">
-		<button class="opt-btn" data-type='add'>Add money</button>
-		<button class="opt-btn" data-type='withdraw'>Withdraw money</button>
-		<button class="opt-btn" data-type='balance'>Show balance</button>
-		<!--<button class="opt-btn" data-type=''>something</button>
-	</div>-->
+	
 
 	<script type="text/javascript">
-		let options = document.getElementById('options')
 		let atmWrapper = document.getElementById('atm')
-		let test = new Atm(atmWrapper, options);
+		let test = new Atm(atmWrapper);
 		test.initEvents();
+		test.hideExcept('options')
 		let card = new Card();
 	</script>
 </body>

@@ -1,3 +1,7 @@
+p {
+	margin: 0;
+}
+
 .atm {
 	display: flex;
 	flex-direction: row;
@@ -5,10 +9,14 @@
 	align-items: center;
 }
 
+.info {
+	font-size: 2em;
+	text-align: center;
+}
+
 .wrapper {
 	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
+	justify-content: center;
 } 
 
 .screen {
@@ -18,11 +26,20 @@
 	color: white;
 }
 
-.options {
+.content {
+	position: relative;
 	display: flex;
-	justify-content: center;
-} 
+	flex-direction: column;
+	justify-content: space-around;
+	min-height: 600px;
+}
 
-.opt-btn {
+.to-main {
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+.ctr-btn {
 	margin: 5px 10px;
 }
