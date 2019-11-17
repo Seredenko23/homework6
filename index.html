@@ -11,14 +11,15 @@
 	<div class="atm" id="atm">
 		<div class="screen">
 			<div class="content content-js">
-				<button class="to-main main-js">На головну</button>
+				<button class="to-main ctr-btn main-js">На головну</button>
 				<p class="info atm-info-js">
 					Оберіть дію
 				</p>
 				
-				<div class='add-js'>
-					<p class="totalSum">Вся сума:<span class="total"> 0 </p>
-					<button>Перерахувати</button>
+				<div class='totalSum add-js'>
+					<p class="">Вся сума:<span class="total-js"> 0 </p>
+					<button class="ctr-btn"
+					 data-type='transfer'>Перерахувати</button>
 				</div>
 
 				<div class="wrapper add-js">
@@ -39,6 +40,14 @@
 					<button class="ctr-btn" data-type='withdraw'>Зняти</button>
 				</div>
 
+				<div class="wrapper choose-js">
+					<select class="cards" name="cards" id="card">
+						<option value='1'>Card</option>
+						<option value='2'>Card 2</option>
+						<option value='3'>Card 3</option>
+					</select>
+				</div>
+
 				<div class="wrapper options-js">
 					<button class="ctr-btn"
 					 data-type='add'>Add money</buwtton>
@@ -46,19 +55,30 @@
 					 data-type='withdraw'>Withdraw money</button>
 					<button class="ctr-btn"
 					 data-type='balance'>Show balance</button>
+					 <button class="ctr-btn"
+					 data-type='card'>Card Balance</button>
+					 <button class="ctr-btn"
+					 data-type='choose'>Choose card</button>
 				</div>	
 
 			</div>
 		</div>
 	</div>
 	
-
 	<script type="text/javascript">
 		let atmWrapper = document.getElementById('atm')
+		let select = document.getElementById('card')
 		let test = new Atm(atmWrapper);
 		test.initEvents();
 		test.hideExcept('options')
-		let card = new Card();
+		let card = new Card('test');
+		let card2 = new Card('test2');
+		let card3 = new Card('test3');
+		let cards = [card, card2, card3];
+
+	  select.onchange = (event) => {
+	  	test.setCard(cards[event.target.value-1])
+	  }
 	</script>
 </body>
 </html>
