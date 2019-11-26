@@ -48,6 +48,11 @@
 					</select>
 				</div>
 
+				<div class="wrapper addToCard-js">
+					<input type="text" class="add-input">
+					<button class="ctr-btn" data-type="addToCard">Додати</button>
+				</div>
+
 				<div class="wrapper options-js">
 					<button class="ctr-btn"
 					 data-type='add'>Add money</buwtton>
@@ -59,6 +64,8 @@
 					 data-type='card'>Card Balance</button>
 					 <button class="ctr-btn"
 					 data-type='choose'>Choose card</button>
+					 <button class="ctr-btn"
+					 data-type='addToCard'>Add money to card</button>
 				</div>	
 
 			</div>
@@ -68,13 +75,13 @@
 	<script type="text/javascript">
 		let atmWrapper = document.getElementById('atm')
 		let select = document.getElementById('card')
-		let test = new Atm(atmWrapper);
-		test.initEvents();
-		test.hideExcept('options')
 		let card = new Card('test');
 		let card2 = new Card('test2');
 		let card3 = new Card('test3');
 		let cards = [card, card2, card3];
+		let test = new Atm(atmWrapper, card);
+		test.initEvents();
+		test.hideExcept('options')
 
 	  select.onchange = (event) => {
 	  	test.setCard(cards[event.target.value-1])

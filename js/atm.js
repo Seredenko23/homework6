@@ -1,13 +1,14 @@
 class Atm {
-  constructor (atmWrapper) {
+  constructor (atmWrapper, card) {
     this.atmWrapper = atmWrapper,
-    this.currentCard,
+    this.currentCard = card,
     this.controlElements = {
       options: atmWrapper.getElementsByClassName('options-js')[0],
       add: atmWrapper.getElementsByClassName('add-js')[1],
       transfer: atmWrapper.getElementsByClassName('add-js')[0],
       withdraw: atmWrapper.getElementsByClassName('withdraw-js')[0],
-      choose: atmWrapper.getElementsByClassName('choose-js')[0]
+      choose: atmWrapper.getElementsByClassName('choose-js')[0],
+      addToCard: atmWrapper.getElementsByClassName('addToCard-js')[0]
     }
     this.info = atmWrapper.getElementsByClassName('atm-info-js')[0],
     this.total = atmWrapper.getElementsByClassName('total-js')[0],
@@ -57,6 +58,8 @@ class Atm {
   withdrawCash (card, value) {
     if (value > this._balance) {
       this.info.textContent = 'В банкоматі не вистачає грошей!'
+    } else if (value > card.showBalance()) {
+      this.info.textContent = 'На карті не вистачає грошей!'
     } else {
       let temp = value
       const bills = {}
@@ -72,11 +75,11 @@ class Atm {
           this._values[el] -= bills[el]
         })
         this._balance -= value
-        card.addMoney(value)
-        this.info.textContent = 'Гроші успішно перераховані на вашу карту'
+        card.withdrawMoney(value)
+        this.info.textContent = 'Гроші успішно зняті!'
         this.hideExcept('options')
       } else {
-        this.info.textContent = 'Не вистачає купюр!'
+        this.info.textContent = 'Не вистачає купюр в банкоматі!'
       }
     }
   }
@@ -102,6 +105,16 @@ class Atm {
     if (target.dataset.type === 'withdraw') {
       const input = atmWrapper.getElementsByClassName('withdraw-input')[0]
       this.withdrawCash(this.currentCard, input.value)
+    }
+  }
+
+  addToCardHandler (event) {
+    const target = event.target
+    if (target.dataset.type === 'addToCard') {
+      const input = atmWrapper.getElementsByClassName('add-input')[0]
+      this.currentCard.addMoney(input.value)
+      this.hideExcept('options')
+      this.info.textContent = 'Гроші успішно нараховані на курту!'
     }
   }
 
@@ -141,6 +154,9 @@ class Atm {
       case 'choose':
         this.info.textContent = 'Оберіть карту'
         break
+      case 'addToCard':
+        this.info.textContent = 'Скільки бажаете додати грошей до картки?'
+        break
       default:
         this.hideExcept('options')
         break
@@ -160,12 +176,11 @@ class Atm {
 
   initEvents () {
     const main = atmWrapper.getElementsByClassName('main-js')[0]
-    const withdraw = atmWrapper.getElementsByClassName('withdraw-js')[0]
-    const add = atmWrapper.getElementsByClassName('add-js')[1]
+    this.controlElements.withdraw.addEventListener('click', this.withdrawHandler.bind(this))
+    this.controlElements.add.addEventListener('click', this.addHandler.bind(this))
     this.controlElements.options.addEventListener('click', this.optionHandler.bind(this))
     this.controlElements.transfer.addEventListener('click', this.transferHandler.bind(this))
+    this.controlElements.addToCard.addEventListener('click', this.addToCardHandler.bind(this))
     main.addEventListener('click', this.toMain.bind(this))
-    withdraw.addEventListener('click', this.withdrawHandler.bind(this))
-    add.addEventListener('click', this.addHandler.bind(this))
   }
 }

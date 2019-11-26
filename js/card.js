@@ -1,11 +1,15 @@
 class Card {
   constructor (name) {
-  	this.name = name
+    this.name = name
     this.balance = 0
   }
 
   addMoney (value) {
     this.balance += +value
+  }
+
+  withdrawMoney (value) {
+    this.balance -= +value
   }
 
   showBalance () {
